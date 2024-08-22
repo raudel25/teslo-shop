@@ -8,7 +8,7 @@ export default function ShopLayout({
   return (
     <main className="h-screen flex flex-col">
       <TopMenu />
-      {children}
+      <div className="flex-grow overflow-y-auto px-0 sm:px-10">{children}</div>
     </main>
   );
 }
