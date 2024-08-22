@@ -1,4 +1,4 @@
-import NotFoundPage from "@/components/ui/not-found/NotFoundPage";
+import { NotFoundPage } from "@/components";
 
 export default function CategoryNotFoundPage() {
   return <NotFoundPage />;

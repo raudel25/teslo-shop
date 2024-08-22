@@ -2,7 +2,7 @@ import { titleFont } from "@/conf/fonts";
 import Link from "next/link";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 
-const TopMenu = () => {
+export const TopMenu = () => {
   return (
     <nav className="flex px-5 justify-between items-center w-full">
       <Link href={"/"}>
@@ -53,5 +53,3 @@ const TopMenu = () => {
     </nav>
   );
 };
-
-export default TopMenu;
