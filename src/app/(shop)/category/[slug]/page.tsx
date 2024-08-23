@@ -14,7 +14,7 @@ const products = initialData.products;
 export default function CategoryPage({ params }: Props) {
   const { slug } = params;
 
-  const category = initialData.categories.find((c) => c.slug == slug);
+  const category = initialData.categories.find((c) => c.slug === slug);
   if (!category) notFound();
 
   return (

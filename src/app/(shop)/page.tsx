@@ -7,7 +7,7 @@ const products = initialData.products;
 export default function Home() {
   return (
     <div className="">
-      <Title title="Hola" subTitle="Mundo" />
+      <Title title="Store" subTitle="All products" />
       <ProductGrid products={products} />
     </div>
   );
