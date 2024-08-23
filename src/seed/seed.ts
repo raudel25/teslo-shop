@@ -38,7 +38,7 @@ export const initialData: SeedData = {
     },
     {
       isMain: true,
-      slug: "woman11",
+      slug: "women",
       title: "Women's articles",
       subTitle: "All products for women",
       label: "Women",
