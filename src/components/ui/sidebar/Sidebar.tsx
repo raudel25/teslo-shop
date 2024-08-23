@@ -1,3 +1,7 @@
+"use client";
+
+import { uiStore } from "@/store";
+import clsx from "clsx";
 import Link from "next/link";
 import { ReactNode } from "react";
 import {
@@ -18,6 +22,8 @@ interface MenuItem {
 }
 
 export const Sidebar = () => {
+  const { isSideMenu, closeSideMenu } = uiStore();
+
   const getMenuItem = (item: MenuItem, idx: number) => (
     <Link
       key={idx}
@@ -31,14 +37,29 @@ export const Sidebar = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 h-screen w-screen z-10 bg-black opacity-30"></div>
+      {isSideMenu && (
+        <div className="fixed top-0 left-0 h-screen w-screen z-10 bg-black opacity-30"></div>
+      )}
 
-      <div className="fixed top-0 left-0 h-screen w-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+      {isSideMenu && (
+        <div
+          onClick={closeSideMenu}
+          className="fixed top-0 left-0 h-screen w-screen z-10 backdrop-filter backdrop-blur-sm"
+        ></div>
+      )}
 
-      <nav className="fixed p-5 top-0 right-0 h-screen w-[400px] bg-white z-20 shadow-2xl transform transition-all duration-300">
+      <nav
+        className={clsx(
+          "fixed p-5 top-0 right-0 h-screen w-[400px] bg-white z-20 shadow-2xl transform transition-all duration-300",
+          {
+            "translate-x-full": !isSideMenu,
+          }
+        )}
+      >
         <IoCloseOutline
           size={30}
           className="absolute top-5 right-5 cursor-pointer"
+          onClick={closeSideMenu}
         />
         <div className="relative mt-14">
           <IoSearchOutline className="absolute top-2 left-2" size={15} />
