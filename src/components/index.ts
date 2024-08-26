@@ -3,6 +3,7 @@ export * from "./ui/not-found/NotFoundPage";
 export * from "./ui/title/Title";
 export * from "./ui/sidebar/Sidebar";
 export * from "./ui/footer/Footer";
+export * from "./ui/pagination/Pagination";
 
 export * from "./product/size-selector/SizeSelector";
 export * from "./product/quantity-selector/QuantitySelector";
