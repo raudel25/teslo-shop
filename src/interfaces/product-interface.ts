@@ -5,9 +5,8 @@ export interface Product {
   price: number;
   sizes: Size[];
   slug: string;
-  tags: string[];
   title: string;
-  category: string;
+  categoryId: string;
 }
 
 export interface Category {
