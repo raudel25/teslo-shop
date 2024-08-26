@@ -1,26 +1,41 @@
-import { ProductGrid } from "@/components";
+export const revalidate = 60;
+
+import { getCategoryBySlug, getPaginatedProducts } from "@/actions";
+import { Pagination, ProductGrid } from "@/components";
 import Title from "@/components/ui/title/Title";
-import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
+import { isNumber } from "@/utils";
+import { notFound, redirect } from "next/navigation";
 
 interface Props {
   params: {
     slug: string;
   };
+  searchParams: { page?: string };
 }
 
-const products = initialData.products;
-
-export default function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = params;
+  const page = isNumber(searchParams.page) ? parseInt(searchParams.page!) : 1;
 
-  const category = initialData.categories.find((c) => c.slug === slug);
-  if (!category) notFound();
+  const responseCategory = await getCategoryBySlug(slug);
+  if (!responseCategory.ok) notFound();
+
+  const responseProducts = await getPaginatedProducts(
+    { page: page },
+    { category: slug }
+  );
+  if (!responseProducts.ok || responseProducts.value!.data.length === 0) {
+    redirect("/");
+  }
 
   return (
-    <div className="">
-      <Title title={category.title} subTitle={category.subTitle} />
-      <ProductGrid products={products.filter((p) => p.category === slug)} />
+    <div>
+      <Title
+        title={responseCategory.value!.title}
+        subTitle={responseCategory.value!.subTitle ?? undefined}
+      />
+      <ProductGrid products={responseProducts.value!.data} />
+      <Pagination totalPages={responseProducts.value!.total} />
     </div>
   );
 }

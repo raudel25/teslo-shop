@@ -8,3 +8,9 @@ export interface PaginatedResponse<T> {
   total: number;
   data: T[];
 }
+
+export interface ApiResponse<T> {
+  ok: boolean;
+  value?: T;
+  message?: string;
+}

@@ -14,7 +14,7 @@ export interface Category {
   slug: string;
   label: string;
   title: string;
-  subTitle?: string;
+  subTitle: string | null;
 }
 
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
