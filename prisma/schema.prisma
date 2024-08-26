@@ -34,12 +34,12 @@ model Category {
 }
 
 model Product {
-  id         String @id @default(uuid())
-  title      String
-  descrption String
-  inStock    Int
-  price      Float  @default(0)
-  slug       String @unique
+  id          String @id @default(uuid())
+  title       String
+  description String
+  inStock     Int
+  price       Float  @default(0)
+  slug        String @unique
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -48,8 +48,8 @@ model Product {
 }
 
 model Image {
-  id       String    @id @default(uuid())
-  url      String
-  
+  id  String @id @default(uuid())
+  url String
+
   products Product[]
 }
