@@ -24,6 +24,7 @@ async function main() {
         price: p.price,
         categoryId: category!.id,
         slug: p.slug,
+        sizes: p.sizes,
         images: { create: p.images.map((img) => ({ url: img })) },
       },
     });

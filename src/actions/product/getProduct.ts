@@ -40,3 +40,19 @@ export const getPaginatedProducts = async (
     },
   };
 };
+
+export const getProductBySlug = async (
+  slug: string
+): Promise<ApiResponse<Product>> => {
+  const product = await prisma.product.findUnique({
+    where: { slug: slug },
+    include: { images: { select: { url: true } } },
+  });
+
+  if (!product) return { ok: false, message: "Not found product" };
+
+  return {
+    ok: true,
+    value: { ...product, images: product.images.map((img) => img.url) },
+  };
+};
