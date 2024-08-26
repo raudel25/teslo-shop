@@ -8,6 +8,7 @@ import {
 import { titleFont } from "@/conf/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import { AddToCart } from "./ui/AddToCart";
 
 interface Props {
   params: { slug: string };
@@ -20,7 +21,7 @@ export async function generateMetadata(
   const response = await getProductBySlug(params.slug);
 
   return {
-    title: (response.value?.title ?? "Product not found"),
+    title: response.value?.title ?? "Product not found",
     description: response.value?.description ?? "",
     openGraph: {
       title: response.value?.title ?? "Product not found",
@@ -61,14 +62,7 @@ export default async function ProductPage({ params }: Props) {
         </h1>
         <p className="text-lg mb-5">${product.price}</p>
 
-        <SizeSelector
-          availableSizes={product.sizes}
-          selectedSize={product.sizes[0]}
-        />
-
-        <QuantitySelector quantity={2} />
-
-        <button className="btn-primary my-5">Add to car</button>
+        <AddToCart product={product} />
 
         <h3 className="font-bold text-sm">Description</h3>
         <p className="font-light">{product.description}</p>
