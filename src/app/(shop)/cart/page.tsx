@@ -1,15 +1,7 @@
-import { QuantitySelector } from "@/components";
 import Title from "@/components/ui/title/Title";
-import { initialData } from "@/seed/seed";
-import Image from "next/image";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
-
-const productsInCar = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
+import { OrderSummary } from "@/components";
 
 export default function CartPage() {
   return (
@@ -28,22 +20,7 @@ export default function CartPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
-            <h2 className="text-2xl mb-2">Order summary</h2>
-
-            <div className="grid grid-cols-2">
-              <span>No. Products</span>
-              <span className="text-right">3 articles</span>
-
-              <span>Subtotal</span>
-              <span className="text-right">$ 100</span>
-
-              <span>Impuestos</span>
-              <span className="text-right">$ 100</span>
-
-              <span className="mt-5 text-2xl">Total:</span>
-              <span className="mt-5 text-2xl text-right">$ 100</span>
-            </div>
-
+            <OrderSummary />
             <div className="mt-5 mb-2 w-full">
               <Link
                 className="flex btn-primary justify-center"
