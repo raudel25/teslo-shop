@@ -24,6 +24,7 @@ export const AddToCart = ({ product }: Props) => {
       price: product.price,
       title: product.title,
       image: product.images[0],
+      inStock: product.inStock,
     });
     setSize(product.sizes[0]);
     setQuantity(1);

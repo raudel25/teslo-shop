@@ -26,6 +26,7 @@ export interface CartProduct {
   price: number;
   title: string;
   image: string;
+  inStock: number;
 }
 
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";

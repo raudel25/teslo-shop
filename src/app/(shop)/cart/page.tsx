@@ -3,6 +3,7 @@ import Title from "@/components/ui/title/Title";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
+import { ProductsInCart } from "./ui/ProductsInCart";
 
 const productsInCar = [
   initialData.products[0],
@@ -23,28 +24,7 @@ export default function CartPage() {
               Continue shopping
             </Link>
 
-            {productsInCar.map((p, idx) => (
-              <div className="flex mb-5" key={idx}>
-                <Image
-                  src={`/products/${p.images[0]}`}
-                  alt={p.title}
-                  width={100}
-                  height={100}
-                  className="mr-5 rounded"
-                  style={{ width: "100px", height: "100px" }}
-                />
-                <div>
-                  <p>{p.title}</p>
-                  <p>${p.price}</p>
-                  {/* <QuantitySelector
-                    quantity={3}
-                    maxQuantity={3}
-                    onChange={() => {}}
-                  /> */}
-                  <button className="mt-3 underline">Remove</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
