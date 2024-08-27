@@ -36,7 +36,11 @@ export default function CartPage() {
                 <div>
                   <p>{p.title}</p>
                   <p>${p.price}</p>
-                  <QuantitySelector quantity={3} />
+                  {/* <QuantitySelector
+                    quantity={3}
+                    maxQuantity={3}
+                    onChange={() => {}}
+                  /> */}
                   <button className="mt-3 underline">Remove</button>
                 </div>
               </div>

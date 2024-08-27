@@ -1,4 +1,5 @@
 export interface Product {
+  id: string;
   description: string;
   images: string[];
   inStock: number;
@@ -15,6 +16,16 @@ export interface Category {
   label: string;
   title: string;
   subTitle: string | null;
+}
+
+export interface CartProduct {
+  id: string;
+  slug: string;
+  quantity: number;
+  size: Size;
+  price: number;
+  title: string;
+  image: string;
 }
 
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
