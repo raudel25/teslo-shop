@@ -5,12 +5,20 @@ import { CartProduct } from "@/interfaces";
 import { cartStore } from "@/store";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const ProductsInCart = () => {
   const { products, updateProduct, removeProduct } = cartStore();
+  const [firstLoad, setFirstLoad] = useState<boolean>(false);
 
   const updateProductQuantity = (quantity: number, product: CartProduct) =>
     updateProduct({ ...product, quantity: quantity });
+
+  useEffect(() => {
+    if (products.length === 0 && firstLoad) redirect("/empty");
+    setFirstLoad(true);
+  }, [products]);
 
   return (
     <>

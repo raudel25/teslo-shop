@@ -9,6 +9,7 @@ import { titleFont } from "@/conf/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
+import { currencyFormat } from "@/utils";
 
 interface Props {
   params: { slug: string };
@@ -60,7 +61,7 @@ export default async function ProductPage({ params }: Props) {
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
-        <p className="text-lg mb-5">${product.price}</p>
+        <p className="text-lg mb-5">{currencyFormat(product.price)}</p>
 
         <AddToCart product={product} />
 
