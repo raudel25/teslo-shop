@@ -1,3 +1,5 @@
+"use server";
+
 import { ApiResponse, Category } from "@/interfaces";
 import prisma from "@/lib/prisma";
 

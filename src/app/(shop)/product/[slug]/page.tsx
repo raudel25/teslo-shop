@@ -1,10 +1,5 @@
 import { getProductBySlug } from "@/actions";
-import {
-  MobileSlideshow,
-  QuantitySelector,
-  SizeSelector,
-  Slideshow,
-} from "@/components";
+import { MobileSlideshow, Slideshow } from "@/components";
 import { titleFont } from "@/conf/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
