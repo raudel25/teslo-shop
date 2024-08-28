@@ -3,8 +3,9 @@
 import { logout } from "@/actions/auth/logout";
 import { uiStore } from "@/store";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   IoCloseOutline,
   IoLogInOutline,
@@ -25,12 +26,21 @@ interface MenuItem {
 
 export const Sidebar = () => {
   const { isSideMenu, closeSideMenu } = uiStore();
+  const { data, update } = useSession();
+  const [session, setSession] = useState(data);
+
+  useEffect(() => {
+    update().then((currentSession) => setSession(currentSession));
+  }, [isSideMenu]);
 
   const getMenuItem = (item: MenuItem, idx: number) =>
     item.onClick ? (
       <button
         key={idx}
-        onClick={item.onClick}
+        onClick={() => {
+          closeSideMenu();
+          item.onClick!();
+        }}
         className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
       >
         {item.icon}
@@ -41,6 +51,7 @@ export const Sidebar = () => {
         key={idx}
         href={item.link!}
         className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+        onClick={() => closeSideMenu()}
       >
         {item.icon}
         <span className="ml-3 text-sm">{item.text}</span>
@@ -84,32 +95,58 @@ export const Sidebar = () => {
 
         <div className="mt-10">
           {[
-            { link: "/", text: "Profile", icon: <IoPersonOutline size={20} /> },
-            { link: "/", text: "Orders", icon: <IoTicketOutline size={20} /> },
-            {
-              link: "/auth/login",
-              text: "Login",
-              icon: <IoLogInOutline size={20} />,
-            },
-            {
-              onClick: () => logout(),
-              text: "Logout",
-              icon: <IoLogOutOutline size={20} />,
-            },
+            ...(session?.user?.role === "user"
+              ? [
+                  {
+                    link: "/",
+                    text: "Profile",
+                    icon: <IoPersonOutline size={20} />,
+                  },
+                  {
+                    link: "/",
+                    text: "Orders",
+                    icon: <IoTicketOutline size={20} />,
+                  },
+                ]
+              : []),
+            session?.user
+              ? {
+                  onClick: async () => {
+                    await logout();
+                  },
+                  text: "Logout",
+                  icon: <IoLogOutOutline size={20} />,
+                }
+              : {
+                  link: "/auth/login",
+                  text: "Login",
+                  icon: <IoLogInOutline size={20} />,
+                },
           ].map(getMenuItem)}
         </div>
+        {session?.user?.role === "admin" && (
+          <>
+            <div className="w-full h-px bg-gray-200 my-10" />
 
-        <div className="w-full h-px bg-gray-200 my-10" />
-
-        {[
-          { link: "/", text: "Products", icon: <IoShirtOutline size={20} /> },
-          { link: "/", text: "Orders", icon: <IoTicketOutline size={20} /> },
-          {
-            link: "/auth/login",
-            text: "Users",
-            icon: <IoPeopleOutline size={20} />,
-          },
-        ].map(getMenuItem)}
+            {[
+              {
+                link: "/",
+                text: "Products",
+                icon: <IoShirtOutline size={20} />,
+              },
+              {
+                link: "/",
+                text: "Orders",
+                icon: <IoTicketOutline size={20} />,
+              },
+              {
+                link: "/auth/login",
+                text: "Users",
+                icon: <IoPeopleOutline size={20} />,
+              },
+            ].map(getMenuItem)}
+          </>
+        )}
       </nav>
     </div>
   );

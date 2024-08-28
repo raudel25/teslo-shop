@@ -7,15 +7,14 @@ import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import clsx from "clsx";
 import { authenticate } from "@/actions/auth/login";
+import { redirect } from "next/navigation";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
 
-  console.log(state);
-
   useEffect(() => {
     if (state === "Success") {
-      window.location.replace("/");
+      redirect("/");
     }
   }, [state]);
 
