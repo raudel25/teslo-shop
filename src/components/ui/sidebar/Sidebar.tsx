@@ -1,5 +1,6 @@
 "use client";
 
+import { logout } from "@/actions/auth/logout";
 import { uiStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
@@ -16,7 +17,8 @@ import {
 } from "react-icons/io5";
 
 interface MenuItem {
-  link: string;
+  link?: string;
+  onClick?: () => void;
   icon: ReactNode;
   text: string;
 }
@@ -24,16 +26,26 @@ interface MenuItem {
 export const Sidebar = () => {
   const { isSideMenu, closeSideMenu } = uiStore();
 
-  const getMenuItem = (item: MenuItem, idx: number) => (
-    <Link
-      key={idx}
-      href={item.link}
-      className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
-    >
-      {item.icon}
-      <span className="ml-3 text-sm">{item.text}</span>
-    </Link>
-  );
+  const getMenuItem = (item: MenuItem, idx: number) =>
+    item.onClick ? (
+      <button
+        key={idx}
+        onClick={item.onClick}
+        className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+      >
+        {item.icon}
+        <span className="ml-3 text-sm">{item.text}</span>
+      </button>
+    ) : (
+      <Link
+        key={idx}
+        href={item.link!}
+        className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+      >
+        {item.icon}
+        <span className="ml-3 text-sm">{item.text}</span>
+      </Link>
+    );
 
   return (
     <div>
@@ -80,7 +92,7 @@ export const Sidebar = () => {
               icon: <IoLogInOutline size={20} />,
             },
             {
-              link: "/",
+              onClick: () => logout(),
               text: "Logout",
               icon: <IoLogOutOutline size={20} />,
             },

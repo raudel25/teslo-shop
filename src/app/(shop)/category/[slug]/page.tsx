@@ -1,6 +1,7 @@
 export const revalidate = 60;
 
-import { getCategoryBySlug, getPaginatedProducts } from "@/actions";
+import { getCategoryBySlug } from "@/actions/category/getCategory";
+import { getPaginatedProducts } from "@/actions/product/getProduct";
 import { Pagination, ProductGrid } from "@/components";
 import Title from "@/components/ui/title/Title";
 import { isNumber } from "@/utils";

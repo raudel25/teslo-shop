@@ -14,7 +14,7 @@ interface SeedProduct {
 type ValidSizes = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 type ValidTypes = "shirts" | "pants" | "hoodies" | "hats";
 
-export interface Category {
+export interface SeedCategory {
   isMain: boolean;
   slug: string;
   label: string;
@@ -22,12 +22,34 @@ export interface Category {
   subTitle?: string;
 }
 
+interface SeedUser {
+  email: string;
+  password: string;
+  name: string;
+  role: "user" | "admin";
+}
+
 interface SeedData {
+  users: SeedUser[];
   products: SeedProduct[];
-  categories: Category[];
+  categories: SeedCategory[];
 }
 
 export const initialData: SeedData = {
+  users: [
+    {
+      email: "admin@teslo.com",
+      password: "123456",
+      name: "Teslo Admin",
+      role: "admin",
+    },
+    {
+      email: "user@teslo.com",
+      password: "123456",
+      name: "Teslo User",
+      role: "user",
+    },
+  ],
   categories: [
     {
       isMain: true,

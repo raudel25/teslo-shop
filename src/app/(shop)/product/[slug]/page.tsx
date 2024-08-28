@@ -1,10 +1,10 @@
-import { getProductBySlug } from "@/actions";
 import { MobileSlideshow, Slideshow } from "@/components";
 import { titleFont } from "@/conf/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
 import { currencyFormat } from "@/utils";
+import { getProductBySlug } from "@/actions/product/getProduct";
 
 interface Props {
   params: { slug: string };

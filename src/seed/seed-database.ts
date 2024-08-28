@@ -1,10 +1,12 @@
 import prisma from "../lib/prisma";
 import { initialData } from "./seed";
+import bcryptjs from "bcryptjs";
 
 async function main() {
   console.log("Seeding database");
 
   await Promise.all([
+    prisma.user.deleteMany(),
     prisma.product.deleteMany(),
     prisma.image.deleteMany(),
     prisma.category.deleteMany(),
@@ -28,6 +30,14 @@ async function main() {
         images: { create: p.images.map((img) => ({ url: img })) },
       },
     });
+  });
+
+  await prisma.user.createMany({
+    data: initialData.users.map((u) => ({
+      ...u,
+      verifiedEmail: true,
+      password: bcryptjs.hashSync(u.password),
+    })),
   });
 }
 (() => {

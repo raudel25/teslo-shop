@@ -64,8 +64,8 @@ model User {
   id            String  @id @default(uuid())
   name          String
   email         String  @unique
-  verifiedEmain Boolean
+  verifiedEmail Boolean
   password      String
   role          Role    @default(user)
-  image         String
+  image         String?
 }
