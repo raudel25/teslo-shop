@@ -1,7 +1,6 @@
-import Title from "@/components/ui/title/Title";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
-import { OrderSummary } from "@/components";
+import { OrderSummary, Title } from "@/components";
 
 export default function CartPage() {
   return (

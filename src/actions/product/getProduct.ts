@@ -12,10 +12,10 @@ interface FilterProps {
   category?: string;
 }
 
-export const getPaginatedProducts = async (
+export async function getPaginatedProducts(
   { take = 12, page = 1 }: PaginatedRequest,
   { category }: FilterProps
-): Promise<ApiResponse<PaginatedResponse<Product>>> => {
+): Promise<ApiResponse<PaginatedResponse<Product>>> {
   const products = await prisma.product.findMany({
     take: take,
     skip: (page - 1) * take,
@@ -39,11 +39,11 @@ export const getPaginatedProducts = async (
       })),
     },
   };
-};
+}
 
-export const getProductBySlug = async (
+export async function getProductBySlug(
   slug: string
-): Promise<ApiResponse<Product>> => {
+): Promise<ApiResponse<Product>> {
   const product = await prisma.product.findUnique({
     where: { slug: slug },
     include: { images: { select: { url: true } } },
@@ -55,4 +55,4 @@ export const getProductBySlug = async (
     ok: true,
     value: { ...product, images: product.images.map((img) => img.url) },
   };
-};
+}

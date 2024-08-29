@@ -2,8 +2,8 @@ import {
   DeliveryAddressSummary,
   OrderSummary,
   ProductInOrder,
+  Title,
 } from "@/components";
-import Title from "@/components/ui/title/Title";
 import { initialData } from "@/seed/seed";
 import Link from "next/link";
 

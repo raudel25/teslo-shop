@@ -1,6 +1,7 @@
 import prisma from "../lib/prisma";
 import { initialData } from "./seed";
 import bcryptjs from "bcryptjs";
+import { countries } from "./seed-country";
 
 async function main() {
   console.log("Seeding database");
@@ -10,6 +11,7 @@ async function main() {
     prisma.product.deleteMany(),
     prisma.image.deleteMany(),
     prisma.category.deleteMany(),
+    prisma.country.deleteMany(),
   ]);
 
   await prisma.category.createMany({ data: initialData.categories });
@@ -39,6 +41,8 @@ async function main() {
       password: bcryptjs.hashSync(u.password),
     })),
   });
+
+  await prisma.country.createMany({ data: countries });
 }
 (() => {
   if (process.env.NODE_ENV === "production") return;
