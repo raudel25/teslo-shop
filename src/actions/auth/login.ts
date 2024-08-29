@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { ApiResponse } from "@/interfaces";
 import { AuthError, User } from "next-auth";
 
 export async function authenticate(
@@ -23,5 +24,18 @@ export async function authenticate(
       }
     }
     throw error;
+  }
+}
+
+export async function login(
+  email: string,
+  password: string
+): Promise<ApiResponse<{}>> {
+  try {
+    await signIn("credentials", { email, password, redirect: false });
+
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, message: "Invalid credentials" };
   }
 }
