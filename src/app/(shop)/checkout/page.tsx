@@ -1,19 +1,10 @@
-import {
-  DeliveryAddressSummary,
-  OrderSummary,
-  ProductInOrder,
-  Title,
-} from "@/components";
-import { initialData } from "@/seed/seed";
+import { DeliveryAddressSummary, OrderSummary, Title } from "@/components";
 import Link from "next/link";
+import { ProductsInCheckout } from "./ui/ProductsInCheckout";
+import { getCountries } from "@/actions/address/getCountries";
 
-const productsInCar = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
-
-export default function CheckoutPage() {
+export default async function CheckoutPage() {
+  const { value: countries } = await getCountries();
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
@@ -26,13 +17,11 @@ export default function CheckoutPage() {
               Edit cart
             </Link>
 
-            {productsInCar.map((p, idx) => (
-              <ProductInOrder key={idx} p={p} />
-            ))}
+            <ProductsInCheckout />
           </div>
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
-            <DeliveryAddressSummary />
+            <DeliveryAddressSummary countries={countries ?? []} />
 
             <div className="h-0.5 w-full rounded bg-gray-200 mb-10"></div>
 
