@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn } from "@/auth.config";
 import { ApiResponse } from "@/interfaces";
 import { AuthError, User } from "next-auth";
 
