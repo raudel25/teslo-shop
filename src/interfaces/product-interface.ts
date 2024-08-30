@@ -1,4 +1,3 @@
-import { string } from "zod";
 import { Address } from ".";
 
 export interface Product {
@@ -34,14 +33,14 @@ export interface CartProduct {
 
 export interface Order {
   id: string;
-  // paidAt :string;
+  paidAt: Date | null;
 
   // createdAt DateTime @default(now())
   // updatedAt DateTime @updatedAt
 
   userId: string;
 
-  // orderProducts OrderProduct[]
+  orderProducts: CartProduct[];
 
   deliveryAddress: Address;
 }

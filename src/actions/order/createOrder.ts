@@ -78,7 +78,11 @@ export async function createOrder(
 
     return {
       ok: true,
-      value: { ...order, deliveryAddress: order.deliveryAddress as any },
+      value: {
+        ...order,
+        deliveryAddress: order.deliveryAddress as any,
+        orderProducts: [],
+      },
     };
   } catch (error: any) {
     return { ok: false, message: error?.message };

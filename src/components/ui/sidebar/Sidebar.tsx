@@ -103,7 +103,7 @@ export const Sidebar = () => {
                     icon: <IoPersonOutline size={20} />,
                   },
                   {
-                    link: "/",
+                    link: "/orders",
                     text: "Orders",
                     icon: <IoTicketOutline size={20} />,
                   },
