@@ -1,14 +1,11 @@
-"use client";
-
-import { Country } from "@/interfaces";
-import { addressStore } from "@/store";
+import { Address, Country } from "@/interfaces";
 
 interface Props {
   countries: Country[];
+  address:Address
 }
 
-export const DeliveryAddressSummary = ({ countries }: Props) => {
-  const { address } = addressStore();
+export const DeliveryAddressSummary = ({ countries, address }: Props) => {
   return (
     <div>
       <h2 className="text-2xl mb-2">Delivery address</h2>

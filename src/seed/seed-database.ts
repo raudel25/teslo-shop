@@ -7,6 +7,9 @@ async function main() {
   console.log("Seeding database");
 
   await Promise.all([
+    prisma.orderProduct.deleteMany(),
+    prisma.order.deleteMany(),
+    prisma.address.deleteMany(),
     prisma.user.deleteMany(),
     prisma.product.deleteMany(),
     prisma.image.deleteMany(),

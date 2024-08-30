@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
-import { OrderSummary, Title } from "@/components";
+import { Title } from "@/components";
+import { OrderSummaryInCart } from "./ui/OrderSummaryInCart";
 
 export default function CartPage() {
   return (
@@ -19,7 +20,7 @@ export default function CartPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
-            <OrderSummary />
+            <OrderSummaryInCart />
             <div className="mt-5 mb-2 w-full">
               <Link
                 className="flex btn-primary justify-center"

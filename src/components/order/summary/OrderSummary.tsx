@@ -1,10 +1,11 @@
-"use client";
-
-import { cartStore } from "@/store";
+import { CartProduct } from "@/interfaces";
 import { currencyFormat } from "@/utils";
 
-export const OrderSummary = () => {
-  const { products } = cartStore();
+interface Props {
+  products: CartProduct[];
+}
+
+export const OrderSummary = ({ products }: Props) => {
   return (
     <div>
       <h2 className="text-2xl mb-2">Order summary</h2>

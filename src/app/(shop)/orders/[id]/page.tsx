@@ -2,8 +2,8 @@ import {
   DeliveryAddressSummary,
   OrderSummary,
   ProductInOrder,
+  Title,
 } from "@/components";
-import Title from "@/components/ui/title/Title";
 import { initialData } from "@/seed/seed";
 import clsx from "clsx";
 import { IoCartOutline } from "react-icons/io5";
@@ -35,7 +35,7 @@ export default function OrderPage({ params }: Props) {
       <span className="mx-2">Payment</span>
     </div>
   );
-  
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">

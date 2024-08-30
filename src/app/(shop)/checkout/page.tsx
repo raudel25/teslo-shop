@@ -5,6 +5,7 @@ import { getCountries } from "@/actions/address/getCountries";
 import { auth } from "@/auth.config";
 import { redirect } from "next/navigation";
 import { createOrder } from "@/actions/order/createOrder";
+import { CheckoutClient } from "./ui/CheckoutClient";
 
 export default async function CheckoutPage() {
   const session = await auth();
@@ -12,10 +13,6 @@ export default async function CheckoutPage() {
   if (!session) redirect("/auth/login");
 
   const { value: countries } = await getCountries();
-
-  const submitOrder = async () => {
-    // createOrder()
-  };
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
@@ -33,20 +30,7 @@ export default async function CheckoutPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
-            <DeliveryAddressSummary countries={countries ?? []} />
-
-            <div className="h-0.5 w-full rounded bg-gray-200 mb-10"></div>
-
-            <OrderSummary />
-
-            <div className="mt-5 mb-2 w-full">
-              <button
-                className="flex btn-primary justify-center"
-                onClick={submitOrder}
-              >
-                Submit order
-              </button>
-            </div>
+            <CheckoutClient countries={countries ?? []} />
           </div>
         </div>
       </div>

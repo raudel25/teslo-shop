@@ -1,6 +1,6 @@
 "use server";
 
-import { Address, ApiResponse, Size } from "@/interfaces";
+import { Address, ApiResponse, Order, Size } from "@/interfaces";
 import prisma from "@/lib/prisma";
 
 interface ProductOrderAction {
@@ -13,7 +13,7 @@ export async function createOrder(
   userId: string,
   deliveryAddress: Address,
   orderProducts: ProductOrderAction[]
-): Promise<ApiResponse<{}>> {
+): Promise<ApiResponse<Order>> {
   const tax = 15;
 
   try {
@@ -30,7 +30,7 @@ export async function createOrder(
       })
     );
 
-    await prisma.$transaction(async (tx) => {
+    const order = await prisma.$transaction(async (tx) => {
       orderProducts.forEach(async (p) => {
         if (p.quantity <= 0) throw new Error("Invalid quantity");
 
@@ -72,9 +72,14 @@ export async function createOrder(
           };
         }),
       });
+
+      return order;
     });
 
-    return { ok: true };
+    return {
+      ok: true,
+      value: { ...order, deliveryAddress: order.deliveryAddress as any },
+    };
   } catch (error: any) {
     return { ok: false, message: error?.message };
   }
