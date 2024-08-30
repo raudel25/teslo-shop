@@ -20,7 +20,7 @@ export const CheckoutClient = ({ countries }: Props) => {
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const session = useSession({ required: true });
+  const session = useSession();
 
   const submitOrder = async () => {
     setError("");

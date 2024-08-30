@@ -1,17 +1,10 @@
-import { DeliveryAddressSummary, OrderSummary, Title } from "@/components";
+import { Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCheckout } from "./ui/ProductsInCheckout";
 import { getCountries } from "@/actions/address/getCountries";
-import { auth } from "@/auth.config";
-import { redirect } from "next/navigation";
-import { createOrder } from "@/actions/order/createOrder";
 import { CheckoutClient } from "./ui/CheckoutClient";
 
 export default async function CheckoutPage() {
-  const session = await auth();
-
-  if (!session) redirect("/auth/login");
-
   const { value: countries } = await getCountries();
 
   return (

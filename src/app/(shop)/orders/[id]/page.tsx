@@ -7,7 +7,6 @@ import {
   ProductInOrder,
   Title,
 } from "@/components";
-import { initialData } from "@/seed/seed";
 import clsx from "clsx";
 import { notFound, redirect } from "next/navigation";
 import { IoCartOutline } from "react-icons/io5";
@@ -21,9 +20,7 @@ export default async function OrderPage({ params }: Props) {
 
   const session = await auth();
 
-  if (!session) redirect("/auth/login");
-
-  const response = await getOrder(session.user.id, id);
+  const response = await getOrder(session!.user.id, id);
   const countries = (await getCountries()).value;
 
   if (!response.ok) notFound();

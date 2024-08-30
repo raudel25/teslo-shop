@@ -5,15 +5,12 @@ import { auth } from "@/auth.config";
 import { Title } from "@/components";
 
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
 export default async function OrdersPage() {
   const session = await auth();
 
-  if (!session) redirect("/auth/login");
-
-  const response = await getOrdersByUser(session.user.id);
+  const response = await getOrdersByUser(session!.user.id);
   const orders = response.value ?? [];
 
   return (
@@ -34,19 +31,19 @@ export default async function OrdersPage() {
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Nombre completo
+                Full name
               </th>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Estado
+                State
               </th>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
-                Opciones
+                Options
               </th>
             </tr>
           </thead>
@@ -67,12 +64,12 @@ export default async function OrdersPage() {
                   {order.paidAt != null ? (
                     <>
                       <IoCardOutline className="text-green-800" />
-                      <span className="mx-2 text-green-800">Pagada</span>
+                      <span className="mx-2 text-green-800">Paid</span>
                     </>
                   ) : (
                     <>
                       <IoCardOutline className="text-red-800" />
-                      <span className="mx-2 text-red-800">No Pagada</span>
+                      <span className="mx-2 text-red-800">Not paid</span>
                     </>
                   )}
                 </td>
@@ -81,7 +78,7 @@ export default async function OrdersPage() {
                     href={`/orders/${order.id}`}
                     className="hover:underline"
                   >
-                    Ver orden
+                    See order
                   </Link>
                 </td>
               </tr>

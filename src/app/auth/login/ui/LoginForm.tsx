@@ -7,13 +7,15 @@ import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import clsx from "clsx";
 import { authenticate } from "@/actions/auth/login";
+import { useSearchParams } from "next/navigation";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
+  const params = useSearchParams();
 
   useEffect(() => {
     if (state === "Success") {
-      window.location.replace("/");
+      window.location.replace(params.get("callbackUrl") ?? "/");
     }
   }, [state]);
 
