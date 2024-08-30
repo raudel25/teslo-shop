@@ -53,10 +53,10 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     if (address.firstName) {
       reset(address);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
 
   const onSubmit = async (data: FormInputs) => {
-    console.log("aa");
     setAddress(data);
     const { rememberAddress, ...restAddress } = data;
 

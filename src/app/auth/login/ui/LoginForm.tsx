@@ -17,7 +17,7 @@ export const LoginForm = () => {
     if (state === "Success") {
       window.location.replace(params.get("callbackUrl") ?? "/");
     }
-  }, [state]);
+  }, [state, params]);
 
   return (
     <form action={dispatch} className="flex flex-col">

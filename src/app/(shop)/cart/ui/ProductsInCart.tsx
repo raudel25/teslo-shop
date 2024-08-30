@@ -18,7 +18,7 @@ export const ProductsInCart = () => {
   useEffect(() => {
     if (products.length === 0 && firstLoad) redirect("/empty");
     setFirstLoad(true);
-  }, [products]);
+  }, [products, firstLoad]);
 
   return (
     <>

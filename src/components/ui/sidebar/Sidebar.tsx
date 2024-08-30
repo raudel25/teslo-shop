@@ -31,6 +31,7 @@ export const Sidebar = () => {
 
   useEffect(() => {
     update().then((currentSession) => setSession(currentSession));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSideMenu]);
 
   const getMenuItem = (item: MenuItem, idx: number) =>
