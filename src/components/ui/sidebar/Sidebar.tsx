@@ -31,7 +31,7 @@ export const Sidebar = () => {
 
   useEffect(() => {
     update().then((currentSession) => setSession(currentSession));
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSideMenu]);
 
   const getMenuItem = (item: MenuItem, idx: number) =>
@@ -136,7 +136,7 @@ export const Sidebar = () => {
                 icon: <IoShirtOutline size={20} />,
               },
               {
-                link: "/",
+                link: "/admin/orders",
                 text: "Orders",
                 icon: <IoTicketOutline size={20} />,
               },

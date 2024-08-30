@@ -15,6 +15,7 @@ export const authConfig: NextAuthConfig = {
       const protectedPages = [
         { url: "/checkout", role: "user" },
         { url: "/orders", role: "user" },
+        { url: "/admin", role: "admin" },
       ];
 
       const page = protectedPages.find((p) =>
