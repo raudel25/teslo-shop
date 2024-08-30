@@ -2,9 +2,21 @@ import { DeliveryAddressSummary, OrderSummary, Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCheckout } from "./ui/ProductsInCheckout";
 import { getCountries } from "@/actions/address/getCountries";
+import { auth } from "@/auth.config";
+import { redirect } from "next/navigation";
+import { createOrder } from "@/actions/order/createOrder";
 
 export default async function CheckoutPage() {
+  const session = await auth();
+
+  if (!session) redirect("/auth/login");
+
   const { value: countries } = await getCountries();
+
+  const submitOrder = async () => {
+    // createOrder()
+  };
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
@@ -28,12 +40,12 @@ export default async function CheckoutPage() {
             <OrderSummary />
 
             <div className="mt-5 mb-2 w-full">
-              <Link
+              <button
                 className="flex btn-primary justify-center"
-                href="/orders/321"
+                onClick={submitOrder}
               >
                 Submit order
-              </Link>
+              </button>
             </div>
           </div>
         </div>
