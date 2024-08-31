@@ -10,6 +10,7 @@ import Image from "next/image";
 import clsx from "clsx";
 // import { createUpdateProduct, deleteProductImage } from "@/actions";
 import { useRouter } from "next/navigation";
+import { ProductImage } from "@/components";
 // import { ProductImage } from "@/components";
 
 interface Props {
@@ -220,8 +221,8 @@ export const ProductForm = ({ product, categories }: Props) => {
             />
           </div>
 
-          {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {product.ProductImage?.map((image) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {product.images?.map((image) => (
               <div key={image.id}>
                 <ProductImage
                   alt={product.title ?? ""}
@@ -233,14 +234,14 @@ export const ProductForm = ({ product, categories }: Props) => {
 
                 <button
                   type="button"
-                  onClick={() => deleteProductImage(image.id, image.url)}
+                  // onClick={() => deleteProductImage(image.id, image.url)}
                   className="btn-danger w-full rounded-b-xl"
                 >
                   Eliminar
                 </button>
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </form>

@@ -1,9 +1,14 @@
 import { Address } from ".";
 
+export interface Image {
+  url: string;
+  id: string;
+}
+
 export interface Product {
   id: string;
   description: string;
-  images: string[];
+  images: Image[];
   inStock: number;
   price: number;
   sizes: Size[];
@@ -29,7 +34,7 @@ export interface CartProduct {
   size: Size;
   price: number;
   title: string;
-  image: string;
+  image?: string;
   inStock: number;
 }
 

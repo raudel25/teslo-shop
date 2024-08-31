@@ -1,3 +1,4 @@
+import { ProductImage } from "@/components";
 import { CartProduct } from "@/interfaces";
 import Image from "next/image";
 
@@ -8,8 +9,8 @@ interface Props {
 export const ProductInOrder = ({ p }: Props) => {
   return (
     <div className="flex mb-5">
-      <Image
-        src={`/products/${p.image}`}
+      <ProductImage
+        src={p.image}
         alt={p.title}
         width={100}
         height={100}

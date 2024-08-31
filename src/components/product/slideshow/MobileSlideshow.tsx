@@ -9,7 +9,7 @@ import "./slideshow.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode, Pagination } from "swiper/modules";
-import Image from "next/image";
+import { ProductImage } from "../product-image/ProductImage";
 
 interface Props {
   images: string[];
@@ -29,8 +29,8 @@ export const MobileSlideshow = ({ images, className, title }: Props) => {
       >
         {images.map((img, idx) => (
           <SwiperSlide key={idx}>
-            <Image
-              src={`/products/${img}`}
+            <ProductImage
+              src={img}
               alt={title}
               className="rounded-lg object-fill"
               width={600}

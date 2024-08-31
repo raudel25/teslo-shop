@@ -20,7 +20,7 @@ export async function getPaginatedProducts(
     take: take,
     skip: (page - 1) * take,
     include: {
-      images: { select: { url: true } },
+      images: { select: { url: true, id: true } },
       category: { select: { label: true } },
     },
     where: { category: { slug: category } },
@@ -39,7 +39,7 @@ export async function getPaginatedProducts(
       data: products.map((p) => ({
         ...p,
         category: p.category.label,
-        images: p.images.map((img) => img.url),
+        images: p.images,
       })),
     },
   };
@@ -51,7 +51,7 @@ export async function getProductBySlug(
   const product = await prisma.product.findUnique({
     where: { slug: slug },
     include: {
-      images: { select: { url: true } },
+      images: { select: { url: true, id: true } },
       category: { select: { label: true } },
     },
   });
@@ -63,7 +63,7 @@ export async function getProductBySlug(
     value: {
       ...product,
       category: product.category.label,
-      images: product.images.map((img) => img.url),
+      images: product.images,
     },
   };
 }

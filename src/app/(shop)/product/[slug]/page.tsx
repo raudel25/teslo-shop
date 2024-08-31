@@ -39,13 +39,13 @@ export default async function ProductPage({ params }: Props) {
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       <div className="col-span-1 md:col-span-2">
         <Slideshow
-          images={product.images}
+          images={product.images.map((img) => img.url)}
           title={product.title}
           className="hidden md:block"
         />
         <MobileSlideshow
           className="block md:hidden"
-          images={product.images}
+          images={product.images.map((img) => img.url)}
           title={product.title}
         />
       </div>
