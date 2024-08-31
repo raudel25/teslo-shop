@@ -131,7 +131,7 @@ export const Sidebar = () => {
 
             {[
               {
-                link: "/",
+                link: "/admin/products",
                 text: "Products",
                 icon: <IoShirtOutline size={20} />,
               },

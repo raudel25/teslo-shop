@@ -19,7 +19,10 @@ export async function getPaginatedProducts(
   const products = await prisma.product.findMany({
     take: take,
     skip: (page - 1) * take,
-    include: { images: { select: { url: true } } },
+    include: {
+      images: { select: { url: true } },
+      category: { select: { label: true } },
+    },
     where: { category: { slug: category } },
   });
 
@@ -35,6 +38,7 @@ export async function getPaginatedProducts(
       total: totalPages,
       data: products.map((p) => ({
         ...p,
+        category: p.category.label,
         images: p.images.map((img) => img.url),
       })),
     },
@@ -46,13 +50,20 @@ export async function getProductBySlug(
 ): Promise<ApiResponse<Product>> {
   const product = await prisma.product.findUnique({
     where: { slug: slug },
-    include: { images: { select: { url: true } } },
+    include: {
+      images: { select: { url: true } },
+      category: { select: { label: true } },
+    },
   });
 
   if (!product) return { ok: false, message: "Not found product" };
 
   return {
     ok: true,
-    value: { ...product, images: product.images.map((img) => img.url) },
+    value: {
+      ...product,
+      category: product.category.label,
+      images: product.images.map((img) => img.url),
+    },
   };
 }
