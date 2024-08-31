@@ -12,3 +12,9 @@ export async function getCategoryBySlug(
 
   return { ok: true, value: category! };
 }
+
+export async function getCategories(): Promise<ApiResponse<Category[]>> {
+  const category = await prisma.category.findMany({});
+
+  return { ok: true, value: category };
+}
