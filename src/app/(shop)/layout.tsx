@@ -10,7 +10,7 @@ export default async function ShopLayout({
   return (
     <main className="h-screen flex flex-col">
       <TopMenu categories={response.value ?? []} />
-      <Sidebar />
+      <Sidebar categories={response.value ?? []} />
       <div className="flex-grow overflow-y-auto px-0 sm:px-10">{children}</div>
       <Footer />
     </main>

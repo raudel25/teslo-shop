@@ -2,6 +2,7 @@
 
 import { logout } from "@/actions/auth/logout";
 import { uiStore } from "@/store";
+import { Category } from "@prisma/client";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -25,7 +26,11 @@ interface MenuItem {
   text: string;
 }
 
-export const Sidebar = () => {
+interface Props {
+  categories: Category[];
+}
+
+export const Sidebar = ({ categories }: Props) => {
   const { isSideMenu, closeSideMenu } = uiStore();
   const { data, update } = useSession();
   const [session, setSession] = useState(data);
@@ -154,6 +159,22 @@ export const Sidebar = () => {
             ].map(getMenuItem)}
           </>
         )}
+        <div className="w-full h-px bg-gray-200 my-10" />
+
+        <div className="grid grid-cols-3">
+          {categories
+            .sort((a, b) => Number(b.isMain) - Number(a.isMain))
+            .map((c, idx) => (
+              <Link
+                key={idx}
+                className="m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-center"
+                href={`/category/${c.slug}`}
+                onClick={() => closeSideMenu()}
+              >
+                {c.label}
+              </Link>
+            ))}
+        </div>
       </nav>
     </div>
   );

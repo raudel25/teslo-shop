@@ -28,8 +28,9 @@ export const TopMenu = ({ categories }: Props) => {
       <div className="hidden sm:block">
         {categories
           .filter((c) => c.isMain)
-          .map((c) => (
+          .map((c, idx) => (
             <Link
+              key={idx}
               className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
               href={`/category/${c.slug}`}
             >
