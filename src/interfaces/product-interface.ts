@@ -42,8 +42,8 @@ export interface Order {
   id: string;
   paidAt: Date | null;
 
-  // createdAt DateTime @default(now())
-  // updatedAt DateTime @updatedAt
+  createdAt: Date;
+  updatedAt: Date;
 
   userId: string;
 
