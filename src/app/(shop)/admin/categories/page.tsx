@@ -1,8 +1,7 @@
 export const revalidate = 0;
 
 import { getCategories } from "@/actions/category/getCategory";
-import { Pagination, ProductImage, Title } from "@/components";
-import { currencyFormat } from "@/utils";
+import { Title } from "@/components";
 
 import Link from "next/link";
 

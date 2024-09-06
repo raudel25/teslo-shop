@@ -9,6 +9,7 @@ import {
   deleteProductImage,
 } from "@/actions/product/createOrUpdateProduct";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: Partial<Product>;
@@ -30,8 +31,14 @@ interface FormInputs {
 }
 
 export const ProductForm = ({ product, categories }: Props) => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<{ ok: boolean; message: string }>();
+  const [message, setMessage] = useState<{
+    ok: boolean;
+    message: string;
+    action?: () => void;
+  }>();
 
   const {
     handleSubmit,
@@ -81,7 +88,7 @@ export const ProductForm = ({ product, categories }: Props) => {
     }
 
     setLoading(true);
-    const { ok, message } = await createOrUpdateProduct(formData);
+    const { ok, message, value } = await createOrUpdateProduct(formData);
     setLoading(false);
 
     if (!ok) {
@@ -90,7 +97,11 @@ export const ProductForm = ({ product, categories }: Props) => {
     }
 
     setValue("images", undefined);
-    setMessage({ ok: true, message: "Product successfully updated" });
+    setMessage({
+      ok: true,
+      message: "Product successfully updated",
+      action: () => router.replace(`/admin/product/${value?.slug}`),
+    });
   };
 
   return (
@@ -100,7 +111,10 @@ export const ProductForm = ({ product, categories }: Props) => {
         <Modal
           isOpen={true}
           type={message.ok ? "success" : "error"}
-          onClose={() => setMessage(undefined)}
+          onClose={() => {
+            setMessage(undefined);
+            if (message.action) message.action();
+          }}
           message={message.message}
         />
       )}

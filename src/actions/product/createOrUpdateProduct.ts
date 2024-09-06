@@ -52,7 +52,7 @@ export async function createOrUpdateProduct(
       let p;
 
       if (
-        await prisma.product.findFirst({
+        await tx.product.findFirst({
           where: { slug: product.slug, NOT: id ? { id: id } : undefined },
         })
       )

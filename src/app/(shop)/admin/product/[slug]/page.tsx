@@ -16,7 +16,6 @@ export default async function AdminProductPage({ params }: Props) {
   const responseProduct = await getProductBySlug(slug);
   const responseCategories = await getCategories();
 
-  // Todo: new
   if (!responseProduct.ok && slug !== "new") {
     redirect("/admin/products");
   }

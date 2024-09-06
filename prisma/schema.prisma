@@ -32,8 +32,8 @@ model Category {
   id       String    @id @default(uuid())
   isMain   Boolean
   slug     String    @unique
-  label    String    @unique
-  title    String    @unique
+  label    String
+  title    String
   subTitle String?
   Product  Product[]
 }
