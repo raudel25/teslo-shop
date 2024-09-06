@@ -8,7 +8,7 @@ interface Props {
   onClose: () => void;
 }
 
-const Modal = ({ isOpen, type, message, onClose }: Props) => {
+export const Modal = ({ isOpen, type, message, onClose }: Props) => {
   if (!isOpen) return null;
 
   const modalColor =
@@ -40,5 +40,3 @@ const Modal = ({ isOpen, type, message, onClose }: Props) => {
     </div>
   );
 };
-
-export default Modal;

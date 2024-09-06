@@ -3,14 +3,12 @@
 import { useForm } from "react-hook-form";
 import { Category, Product } from "@/interfaces";
 import clsx from "clsx";
-import { ProductImage } from "@/components";
+import { Modal, ProductImage, Spinner } from "@/components";
 import {
   createOrUpdateProduct,
   deleteProductImage,
 } from "@/actions/product/createOrUpdateProduct";
-import Spinner from "@/components/ui/spinner/Spinner";
 import { useState } from "react";
-import Modal from "@/components/ui/modal/Modal";
 
 interface Props {
   product: Partial<Product>;

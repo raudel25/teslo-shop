@@ -3,7 +3,6 @@ export const revalidate = 0;
 import { getPaginatedProducts } from "@/actions/product/getProduct";
 import { Pagination, ProductImage, Title } from "@/components";
 import { currencyFormat, isNumber } from "@/utils";
-import Image from "next/image";
 
 import Link from "next/link";
 
