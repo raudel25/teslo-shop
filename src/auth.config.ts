@@ -13,9 +13,9 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const protectedPages = [
-        { url: "/checkout", role: "user" },
-        { url: "/orders", role: "user" },
-        { url: "/admin", role: "admin" },
+        { url: "/checkout", roles: ["user"] },
+        { url: "/orders", roles: ["user"] },
+        { url: "/admin", roles: ["admin"] },
       ];
 
       const page = protectedPages.find((p) =>
@@ -24,7 +24,7 @@ export const authConfig: NextAuthConfig = {
 
       if (!page) return true;
 
-      return page.role === auth?.user.role;
+      return page.roles.find((r) => r === auth?.user.role) != null;
     },
     jwt({ token, user }) {
       if (user) token.data = user;

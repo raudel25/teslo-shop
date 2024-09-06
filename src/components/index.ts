@@ -20,3 +20,4 @@ export * from "./products/product-grid/ProductGridItem";
 export * from "./order/summary/DeliveryAddressSummary";
 export * from "./order/summary/OrderSummary";
 export * from "./order/product-in-order/ProductInOrder";
+export * from "./order/page/OrderPage";

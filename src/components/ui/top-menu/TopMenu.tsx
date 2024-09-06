@@ -1,11 +1,16 @@
 "use client";
 
 import { titleFont } from "@/conf/fonts";
+import { Category } from "@/interfaces";
 import { cartStore, uiStore } from "@/store";
 import Link from "next/link";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 
-export const TopMenu = () => {
+interface Props {
+  categories: Category[];
+}
+
+export const TopMenu = ({ categories }: Props) => {
   const { openSideMenu } = uiStore();
   const { products } = cartStore();
   const getTotalItems = () =>
@@ -21,24 +26,16 @@ export const TopMenu = () => {
       </Link>
 
       <div className="hidden sm:block">
-        <Link
-          className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-          href="/category/men"
-        >
-          Men
-        </Link>
-        <Link
-          className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-          href="/category/women"
-        >
-          Women
-        </Link>
-        <Link
-          className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-          href="/category/kid"
-        >
-          Kids
-        </Link>
+        {categories
+          .filter((c) => c.isMain)
+          .map((c) => (
+            <Link
+              className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+              href={`/category/${c.slug}`}
+            >
+              {c.label}
+            </Link>
+          ))}
       </div>
 
       <div className="flex items-center">

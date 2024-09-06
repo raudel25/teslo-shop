@@ -9,12 +9,9 @@ import {
 } from "@/interfaces";
 import prisma from "@/lib/prisma";
 
-export async function getOrder(
-  userId: string,
-  orderId: string
-): Promise<ApiResponse<Order>> {
+export async function getOrder(orderId: string): Promise<ApiResponse<Order>> {
   const order = await prisma.order.findUnique({
-    where: { id: orderId, userId: userId },
+    where: { id: orderId },
     include: {
       orderProducts: {
         include: {
