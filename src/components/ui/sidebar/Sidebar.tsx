@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 import {
   IoCloseOutline,
-  IoGift,
+  IoGiftOutline,
   IoLogInOutline,
   IoLogOutOutline,
   IoPeopleOutline,
@@ -149,10 +149,10 @@ export const Sidebar = ({ categories }: Props) => {
               {
                 link: "/admin/categories",
                 text: "Categories",
-                icon: <IoGift size={20} />,
+                icon: <IoGiftOutline size={20} />,
               },
               {
-                link: "/auth/login",
+                link: "/admin/users",
                 text: "Users",
                 icon: <IoPeopleOutline size={20} />,
               },
