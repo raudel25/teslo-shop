@@ -6,6 +6,10 @@ import { countries } from "./seed-country";
 async function main() {
   console.log("Seeding database");
 
+  await prisma.$executeRaw`
+    CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+  `;
+
   await Promise.all([
     prisma.orderProduct.deleteMany(),
     prisma.order.deleteMany(),

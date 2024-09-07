@@ -6,6 +6,7 @@ import { Category } from "@prisma/client";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import {
   IoCloseOutline,
@@ -34,11 +35,21 @@ export const Sidebar = ({ categories }: Props) => {
   const { isSideMenu, closeSideMenu } = uiStore();
   const { data, update } = useSession();
   const [session, setSession] = useState(data);
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
     update().then((currentSession) => setSession(currentSession));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSideMenu]);
+
+  const handleSearch = () => {
+    const params = new URLSearchParams(searchParams);
+    if (search.length !== 0) params.set("query", search);
+    closeSideMenu();
+    router.push(`/search?${params.toString()}`);
+  };
 
   const getMenuItem = (item: MenuItem, idx: number) =>
     item.onClick ? (
@@ -92,8 +103,15 @@ export const Sidebar = ({ categories }: Props) => {
           onClick={closeSideMenu}
         />
         <div className="relative mt-14">
-          <IoSearchOutline className="absolute top-2 left-2" size={15} />
+          <button onClick={handleSearch}>
+            <IoSearchOutline className="absolute top-2 left-2" size={15} />
+          </button>
           <input
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search"
             className="w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-sm border-gray-200 focus:outline-none focus:border-blue-500"
