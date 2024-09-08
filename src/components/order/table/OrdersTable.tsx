@@ -4,9 +4,10 @@ import { IoCardOutline } from "react-icons/io5";
 
 interface Props {
   orders: Order[];
+  isAdmin: boolean;
 }
 
-export const OrdersTable = ({ orders }: Props) => {
+export const OrdersTable = ({ orders, isAdmin }: Props) => {
   return (
     <div className="mb-10">
       <table className="min-w-full">
@@ -66,7 +67,11 @@ export const OrdersTable = ({ orders }: Props) => {
               </td>
               <td className="text-sm text-gray-900 font-light px-6 ">
                 <Link
-                  href={`/admin/orders/${order.id}`}
+                  href={
+                    isAdmin
+                      ? `/admin/orders/${order.id}`
+                      : `/orders/${order.id}`
+                  }
                   className="hover:underline"
                 >
                   See order

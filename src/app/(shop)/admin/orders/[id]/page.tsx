@@ -16,6 +16,11 @@ export default async function AdminOrderPage({ params }: Props) {
   if (!response.ok) notFound();
 
   return (
-    <OrderPage order={response.value!} id={id} countries={countries ?? []} />
+    <OrderPage
+      order={response.value!}
+      id={id}
+      countries={countries ?? []}
+      isAdmin={true}
+    />
   );
 }

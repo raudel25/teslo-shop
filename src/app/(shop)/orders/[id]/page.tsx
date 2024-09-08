@@ -20,6 +20,11 @@ export default async function OrderUserPage({ params }: Props) {
   if (response.value!.userId !== session?.user.id) notFound();
 
   return (
-    <OrderPage order={response.value!} id={id} countries={countries ?? []} />
+    <OrderPage
+      order={response.value!}
+      id={id}
+      countries={countries ?? []}
+      isAdmin={false}
+    />
   );
 }

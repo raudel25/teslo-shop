@@ -52,4 +52,5 @@ export interface Order {
   deliveryAddress: Address;
 }
 
+
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";

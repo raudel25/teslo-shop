@@ -1,6 +1,7 @@
 import {
   DeliveryAddressSummary,
   OrderSummary,
+  PayPalBtn,
   ProductInOrder,
   Title,
 } from "@/components";
@@ -11,10 +12,11 @@ import { IoCartOutline } from "react-icons/io5";
 interface Props {
   id: string;
   order: Order;
+  isAdmin: boolean;
   countries: Country[];
 }
 
-export const OrderPage = ({ order, countries, id }: Props) => {
+export const OrderPage = ({ order, countries, id, isAdmin }: Props) => {
   const getOrderState = () => (
     <div
       className={clsx(
@@ -53,7 +55,21 @@ export const OrderPage = ({ order, countries, id }: Props) => {
 
             <OrderSummary products={order.orderProducts} />
 
-            {getOrderState()}
+            <div className="mt-5">
+              {order.paidAt != null || isAdmin ? (
+                getOrderState()
+              ) : (
+                <PayPalBtn
+                  orderId={order.id}
+                  amount={
+                    order.orderProducts.reduce(
+                      (price, item) => item.quantity * item.price + price,
+                      0
+                    ) * 1.15
+                  }
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

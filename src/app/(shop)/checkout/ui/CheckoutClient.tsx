@@ -1,7 +1,7 @@
 "use client";
 
 import { createOrder } from "@/actions/order/createOrder";
-import { DeliveryAddressSummary, OrderSummary } from "@/components";
+import { DeliveryAddressSummary, OrderSummary, Spinner } from "@/components";
 import { Country } from "@/interfaces";
 import { addressStore, cartStore } from "@/store";
 import { useSession } from "next-auth/react";
@@ -43,6 +43,7 @@ export const CheckoutClient = ({ countries }: Props) => {
   };
   return (
     <>
+      {loading && <Spinner />}
       <DeliveryAddressSummary countries={countries} address={address} />
       <div className="h-0.5 w-full rounded bg-gray-200 mb-10"></div>
       <OrderSummary products={products} />

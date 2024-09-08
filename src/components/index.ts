@@ -4,7 +4,7 @@ export * from "./ui/title/Title";
 export * from "./ui/sidebar/Sidebar";
 export * from "./ui/footer/Footer";
 export * from "./ui/pagination/Pagination";
-export * from "./ui/provider/Provider";
+export * from "./ui/providers/Providers";
 export * from "./ui/spinner/Spinner";
 export * from "./ui/modal/Modal";
 
@@ -21,3 +21,4 @@ export * from "./order/summary/DeliveryAddressSummary";
 export * from "./order/summary/OrderSummary";
 export * from "./order/product-in-order/ProductInOrder";
 export * from "./order/page/OrderPage";
+export * from "./order/paypal-btn/PayPalBtn";

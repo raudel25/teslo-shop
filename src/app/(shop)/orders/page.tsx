@@ -21,7 +21,7 @@ export default async function OrdersPage({ searchParams }: Props) {
     <>
       <Title title="Orders" />
 
-      <OrdersTable orders={orders} />
+      <OrdersTable orders={orders} isAdmin={false} />
 
       <Pagination totalPages={response.value!.total} />
     </>

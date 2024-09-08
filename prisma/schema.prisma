@@ -111,6 +111,8 @@ model Order {
   orderProducts OrderProduct[]
 
   deliveryAddress Json
+
+  transactionId String?
 }
 
 model OrderProduct {
